@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import django_heroku
 
 import warnings
 
@@ -165,3 +166,5 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 
 }
+
+django_heroku.settings(locals())
