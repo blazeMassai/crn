@@ -26,3 +26,4 @@ django-libs==1.67.13
 django-phonenumber-field==2.0.0
 django-tables2==1.21.2
 dominate==2.3.1
+whitenoise==4.1.3
