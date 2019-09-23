@@ -147,8 +147,14 @@ LOGIN_REDIRECT_URL = reverse_lazy('index')
 # nimezima hapa chini coz nilitumia heroku
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
+#nimeizima kwa heroku
+#STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, 'CR_Note_Monitor/static')
+#]
+
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'CR_Note_Monitor/static')
+    os.path.join(BASE_DIR, 'static')
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 from django.contrib.messages import constants as messages
