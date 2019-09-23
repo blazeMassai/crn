@@ -51,8 +51,6 @@ INSTALLED_APPS = [
     'monitor' ,
     'django.contrib.humanize' ,
     'django_filters' ,
-    'bootstrapform' ,
-    
     'django_select2' ,
 
 ]
