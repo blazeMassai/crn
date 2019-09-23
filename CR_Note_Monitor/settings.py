@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'bootstrap4',
     'station' ,
     'monitor' ,
-    'widget_tweaks',
     'django.contrib.humanize' ,
     'django_filters' ,
     'bootstrapform' ,
