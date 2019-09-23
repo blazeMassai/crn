@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+ 
+
+<div class="py-5">
+<div class="col-md-6 mx-auto">
+ <div class="card">
+     
+     <h4 class="card-header">Confirm Crn Delete</h4>
+				  <div class="card-body">
+     
+    <form method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete {{ object }}</p>
+        <input type="submit" class="btn btn-danger"  value="Confirm">
+    </form>
+     </div>
+ </div>
+</div>
+</div>
+
+{% endblock %}

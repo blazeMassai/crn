@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% load humanize %}
+
+
+{% block title %} | CRN Details{% endblock %}
+
+{% block content %}
+
+
+
+
+<div class="py-5">
+
+     
+
+	    <div class="col-md-6 mx-auto">
+            <div class="card">
+
+			   
+				<h4 class="card-header">CRN Details</h4>
+				  <div class="card-body">
+
+            <div class="text-right">
+             <a  class="btn btn-primary" href="{% url 'crn_new' %}" role="button">New Crn</a>
+            </div>
+       
+					
+						<fieldset>
+                          <h5>Crn Station:
+                            <small class="text-muted"></small>
+                          </h5>
+                          <div class="form-group">
+                            <input type="text" class="form-control" id="readonlyInput" readonly="readonly" value="{{ crn.cr_station }}"
+                            />
+                          </div>
+                        </fieldset>
+
+						<fieldset>
+                        
+                        <fieldset>
+                          <h5>Cr-Note:
+                            <small class="text-muted"></small>
+                          </h5>
+                          <div class="form-group">
+                            <input type="text" class="form-control" id="readonlyInput" readonly="readonly" value="{{ crn.cr_note }}"
+                            />
+                          </div>
+                        </fieldset>
+
+						<fieldset>
+
+            <fieldset>
+                        
+                        <fieldset>
+                          <h5>CRN  Date:
+                            <small class="text-muted"></small>
+                          </h5>
+                          <div class="form-group">
+                            <input type="text" class="form-control" id="readonlyInput" readonly="readonly" value="{{ crn.crn_comm_date }} - {{ crn.crn_clos_date }}"
+                            />
+                          </div>
+                        </fieldset>
+
+            <fieldset>
+                            
+             <fieldset>
+                          <h5>Amount(Tsh):
+                            <small class="text-muted"></small>
+                          </h5>
+                          <div class="form-group">
+                            <input type="text" class="form-control" id="readonlyInput" readonly="readonly" value="{{ crn.cr_cash | intcomma }}"
+                            />
+                          </div>
+                        </fieldset>
+
+						<fieldset>
+                            
+                        <fieldset>
+                          <h5>CRN Status:
+                            <small class="text-muted"></small>
+                          </h5>
+                          <div class="form-group">
+                            <input type="text" class="form-control" id="readonlyInput" readonly="readonly" value="{{ crn.cr_status }}"
+                            />
+                          </div>
+                        </fieldset>
+
+						<fieldset>
+                            
+                            
+                        
+                       
+
+						 
+                            <a button type="button" class="btn btn-primary btn-block" href="{% url 'crn_edit' pk=crn.pk %}">Edit</a>
+                         
+                       
+
+						  {%  if request.user.is_superuser %}
+                            
+                            
+						  
+                            <a button type="button" class="btn btn-danger btn-block"  href="{% url 'crn_remove' pk=crn.pk %}">Delete</a>
+                         
+                          
+						{% endif %}
+
+						</div>
+				  </div>
+			 
+         
+		</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

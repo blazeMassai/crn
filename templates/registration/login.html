@@ -1,0 +1,92 @@
+{% extends "registration\login_base.html" %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+
+
+  <section id="login">
+  <div class="primary-overlay py-5">
+
+
+
+
+<div class="container py-5">
+
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+
+    <div class="card">
+        <div class="card-body">
+            
+            <!--  ALERTS   -->
+                
+                {% include 'partials/_alerts.html' %}
+                
+            <!--  ALERTS   -->
+  
+
+           
+             
+       
+
+        <div class="container">
+            
+                     <h4 class="card-title text-center mb-4 mt-1">Sign In</h4>
+                  <div class="container">
+                    {% if form.errors %}
+
+						<p>Your username and password didn't match! Please try again.</p>
+					{% endif %}
+
+                        <form class="form-group  text-center" action="{% url 'login' %}" method="POST">
+						
+							{% csrf_token %}
+															
+							{% for hidden_field in form.hidden_fields %}
+										{{ hidden_field }}
+						    {% endfor %}
+
+						    {% for field in form.visible_fields %}
+										<div class="form-group">
+										
+										  {{ field.label_tag }}
+										  
+										  {% render_field field class="form-control" %}
+										  
+										  {% if field.help_text %}
+										  
+										  
+											  <small class="form-text text-muted">{{ field.help_text }}</small>
+											  
+											  
+										  {% endif %}
+										</div>
+						    {% endfor %}
+																			
+                             <button type="submit" class="btn btn-primary btn-lg btn-block"><i class="ft-unlock"></i> Login</button>
+							<input type="hidden" name="next" value="{{next}}">
+                        </form>
+			      </div>
+        </div>
+      </form>
+       </div>
+    </div>
+
+    </div>
+    </div>
+
+
+
+
+</div>
+        
+   </div>
+
+
+
+  </section>
+
+
+
+{% endblock %}

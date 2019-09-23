@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% load bootstrap %}
+
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+
+{% load humanize %}
+
+
+
+
+
+{% block title %} | CRN Querry{% endblock %}
+
+{% block content %}
+
+
+
+
+     <div class="container py-4" >
+
+        <div class="text-right">
+             <a  class="btn btn-primary" href="{% url 'crn_new' %}" role="button">New Crn</a>
+        </div>
+
+         <h1>CRN Listings</h1>
+    <table class="table table-striped table-bordered table-hover" id="mydata">
+        <thead>
+            <tr>
+                
+                <th scope="col">Station</th>
+                <th scope="col">Commencing Date</th>
+                <th scope="col">Closing Date</th>
+                <th scope="col">CR_Note</th>
+                <th scope="col">Amount(Tsh)</th>
+                <th scope="col">Status</th>
+                
+            </tr>
+
+        </thead>
+        <tbody>
+            
+            {% for crn in crns %}
+            
+            <tr>
+                
+                <td>{{ crn.cr_station }}</td>
+                <td>{{ crn.crn_comm_date }}</td>
+                <td>{{ crn.crn_clos_date }}</td>
+                <td><a href="{% url 'crn_detail' pk=crn.pk %}">{{ crn.cr_note }}</a></td>
+                <td>{{ crn.cr_cash | intcomma }}</td>
+                <td>{{ crn.cr_status }}</td>
+            </tr>
+            
+             {% endfor %}
+            
+        </tbody>
+        <tfoot>
+            <tr>
+                
+                <th scope="col">Station</th>
+                <th scope="col">Commencing Date</th>
+                <th scope="col">Closing Date</th>
+                <th scope="col">CR_Note</th>
+                <th scope="col">Amount(Tsh)</th>
+                <th scope="col">Status</th>
+                
+            </tr>
+        </tfoot>
+    </table>
+    <button class="btn btn-primary" onclick="exportTableToExcel('mydata')">Export to Excel</button>
+
+
+         <!-- FORM -->
+
+    </div>
+
+
+{% endblock %}

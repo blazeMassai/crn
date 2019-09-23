@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+{% load crispy_forms_tags %}
+
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+   {{ form.media.css }}     <!-- hii ni widget ya select2 -->
+
+    <title>TRC CRN Register {% block title %}{% endblock %}</title>
+</head>
+<body id="home" data-spy="scroll" data-target="#main-nav">
+
+
+  <!--NAVBAR-->
+    <nav class="navbar navbar-expand-md navbar-light fixed-top py-4" >
+      <div class="container">
+        <a href="#home" class="navbar-brand">
+          <img src="{% static 'img/trc.png' %}" width="50" height="50" alt="">
+          <h3 class="d-inline align-middle">  CRN Register</h3>
+        </a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav ml-auto">
+
+      
+              {% if user.is_authenticated %}
+              
+            <li class="nav-item">
+            <a href="{% url 'index' %}" class="nav-link">Home</a>
+            </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  CRN
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="{% url 'crn_new' %}">Add CRN</a>
+                  <a class="dropdown-item" href="{% url 'crn_list' %}">CRN Report</a>
+                  <a class="dropdown-item" href="{% url 'latest_entries' %}">Latest Crns</a>
+                </div>
+              </li>
+
+              <li class="nav-item">
+            <a href="{% url 'allcrn' %}" class="nav-link">All CRN</a>
+            </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    
+                     
+                  Hello,
+                    
+                   <strong>{{user.username}}</strong>
+                    
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+                </div>
+              </li>
+              
+              {% else %}
+              
+                
+            <li class="nav-item">
+            <a  href="{% url 'login' %}"  class="nav-link">Login</a>
+            </li>
+              
+              {% endif %}
+
+            <a href="{% url 'index' %}" class="navbar-brand">
+              <img src="{% static 'img/coa.png' %}" width="50" height="50" alt="">
+
+            </a>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+  <!--Loggin modal-->
+
+
+  {% block content %}
+
+
+  {% endblock %}
+
+<!-- Footer -->
+   {% include 'partials/_footer.html' %}
+    <!--Jquery necessary for bootstrap plugins-->
+    <script src="{% static 'js/jquery-3.3.1.js' %}"></script>
+
+    {{ form.media.js }}   <!-- hii ni widget ya select2 -->
+
+    <!--Include all compiled plugins below or include all individual files as needed-->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
+
+
+    <script>
+
+        $('#mydata').dataTable();
+    </script>
+    <script>
+
+    //initialise scroll spy
+
+
+        function exportTableToExcel(tableID, filename = ''){
+            var downloadLink;
+            var dataType = 'application/vnd.ms-excel';
+            var tableSelect = document.getElementById(tableID);
+            var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+            // Specify file name
+            filename = filename?filename+'.xls':'excel_data.xls';
+
+            // Create download link element
+            downloadLink = document.createElement("a");
+
+            document.body.appendChild(downloadLink);
+
+            if(navigator.msSaveOrOpenBlob){
+                var blob = new Blob(['\ufeff', tableHTML], {
+                    type: dataType
+                });
+                navigator.msSaveOrOpenBlob( blob, filename);
+            }else{
+                // Create a link to the file
+                downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+                // Setting the file name
+                downloadLink.download = filename;
+
+                //triggering the function
+                downloadLink.click();
+            }
+        }
+
+    </script>
+
+
+</body>
+</html>
