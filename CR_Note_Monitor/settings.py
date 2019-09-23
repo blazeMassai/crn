@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'monitor' ,
     'django.contrib.humanize' ,
     'django_filters' ,
-    # 'django_select2' ,
+    'django_select2' ,
 
 ]
 
