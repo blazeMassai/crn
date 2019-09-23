@@ -1,1 +1,1 @@
-web: gunicorn CRN_Note_Monitor.wsgi
+web: gunicorn CR_Note_Monitor.wsgi
